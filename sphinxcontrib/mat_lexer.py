@@ -124,13 +124,15 @@ class MatlabLexer(RegexLexer):
             (r'\d+[eEf][+-]?[0-9]+', Number.Float),
             (r'\d+', Number.Integer),
 
-            (r'(?<![\w)\].])\'', String, 'string'),
-            (r'(?<![\w)\].])\"', String, 'string'),
+            (r'(?<![\w)\].])\'', String, 'string_quote'),
+            (r'(?<![\w)\].])\"', String, 'string_double_quote'),
             (r'[a-zA-Z_]\w*', Name),
             (r'.', Text),
         ],
-        'string': [
+        'string_quote': [
             (r'[^\']*\'', String, '#pop'),
+        ],
+        'string_double_quote': [
             (r'[^\"]*\"', String, '#pop')
         ],
         'blockcomment': [
